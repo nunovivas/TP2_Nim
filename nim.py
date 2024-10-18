@@ -96,6 +96,7 @@ class NimAI():
         best_future = self.best_future_reward(new_state)
         self.update_q_value(old_state, action, old, reward, best_future)
 
+    #TODO:
     def get_q_value(self, state, action):
         """
         Return the Q-value for the state `state` and the action `action`.
@@ -103,7 +104,7 @@ class NimAI():
         """
         if state in self.q and action in self.q[state]:
             return self.q[state][action]
-
+    #TODO:
     def update_q_value(self, state, action, old_q, reward, future_rewards):
         """
         Update the Q-value for the state `state` and the action `action`
