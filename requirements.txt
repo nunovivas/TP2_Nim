@@ -1,0 +1,37 @@
+# Nuno Carmo Vivas
+
+# Baseado no trabalho NIM da semana 4 - Learning 
+# https://cs50.harvard.edu/ai/2024/weeks/4/
+
+
+Notas:
+
+Machine Learning
+
+Supervised Learning
+
+NN Classification
+Perceptron  Learning
+Support Vector Machines
+Regression
+
+
+
+Loss Functions - Quantificar a perda (ou falha) de algumas das funções descritas acima. Quanto menos accuracy, maior a perda
+Overfitting - é quando um modelo "encaixa" nos dados de treino, mas não generaliza bem para dados de teste
+Regularization - é uma técnica para evitar overfitting, através de penalizar hipoteses demasiado complexas
+
+Reinforced Learning - Processo pelo qual, por cada acção tomada, o agente recebe uma recompensa ou penalização, e aprende a melhorar a sua performance
+
+Q-Learning - Algoritmo de Reinforced Learning, que aprende a melhorar a sua performance, através de uma tabela de valores Q, que indica a qualidade de cada acção tomada
+(Aqui entram os greedy vs normais. os Greedy faz sempre "exploit" enquanto que os outros podem fazer exploit ou explore
+
+
+Unsupervised Learning
+
+Clustering - é um metodo que pega nos dados e os organiza por grupos de maneira a que objectos semelhantes acabem no mesmo grupos
+
+k-means - é um algoritmo de clustering que divide os dados em k grupos, de maneira a que a distancia entre os pontos e o centro do grupo seja a menor possivel
+
+
+Para o NIM vai-se usar o Q-Learning
