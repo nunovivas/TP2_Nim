@@ -96,7 +96,7 @@ class NimAI():
         best_future = self.best_future_reward(new_state)
         self.update_q_value(old_state, action, old, reward, best_future)
 
-    #TODO:
+    #TODO: (nothing)
     def get_q_value(self, state, action):
         """
         Return the Q-value for the state `state` and the action `action`.
@@ -104,7 +104,7 @@ class NimAI():
         """
         if state in self.q and action in self.q[state]:
             return self.q[state][action]
-    #TODO:
+    #TODO: (nonthing)
     def update_q_value(self, state, action, old_q, reward, future_rewards):
         """
         Update the Q-value for the state `state` and the action `action`
@@ -127,7 +127,7 @@ class NimAI():
         if state not in self.q: # Se o estado não existir, cria-se um novo
             self.q[state] = {}
         self.q[state][action] = updated_q # Actualiza o valor do estado e acção
-
+    # TODO: (ALL)
     def best_future_reward(self, state):
         """
         Given a state `state`, consider all possible `(state, action)`
@@ -139,7 +139,7 @@ class NimAI():
         `state`, return 0.
         """
         raise NotImplementedError
-
+    #TODO: (ALL)
     def choose_action(self, state, epsilon=True):
         """
         Given a state `state`, return an action `(i, j)` to take.
