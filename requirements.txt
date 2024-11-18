@@ -1,7 +1,7 @@
 # Nuno Carmo Vivas
 
 # Baseado no trabalho NIM da semana 4 - Learning 
-# https://cs50.harvard.edu/ai/2024/weeks/4/
+https://cs50.harvard.edu/ai/2024/weeks/4/
 
 
 Notas:
@@ -10,10 +10,10 @@ Machine Learning
 
 Supervised Learning
 
-NN Classification
-Perceptron  Learning
-Support Vector Machines
-Regression
+-> NN Classification
+-> Perceptron  Learning
+-> Support Vector Machines
+-> Regression
 
 
 
@@ -24,7 +24,8 @@ Regularization - é uma técnica para evitar overfitting, através de penalizar 
 Reinforced Learning - Processo pelo qual, por cada acção tomada, o agente recebe uma recompensa ou penalização, e aprende a melhorar a sua performance
 
 Q-Learning - Algoritmo de Reinforced Learning, que aprende a melhorar a sua performance, através de uma tabela de valores Q, que indica a qualidade de cada acção tomada
-(Aqui entram os greedy vs normais. os Greedy faz sempre "exploit" enquanto que os outros podem fazer exploit ou explore
+(Aqui entram os greedy vs normais. os Greedy faz sempre "exploit" enquanto que os outros podem fazer exploit ou explore.
+Exploit ->  significa que consegue encontrar a solução mais rapida, mas pode não ser a melhor solução)
 
 
 Unsupervised Learning

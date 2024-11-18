@@ -82,9 +82,9 @@ class NimAI():
          - `state` is a tuple of remaining piles, e.g. (1, 1, 4, 4)
          - `action` is a tuple `(i, j)` for an action
         """
-        self.q = dict()
-        self.alpha = alpha
-        self.epsilon = epsilon
+        self.q = {}  # Initialize Q-values dictionary
+        self.alpha = alpha  # Learning rate
+        self.epsilon = epsilon  # Exploration rate
 
     def update(self, old_state, action, new_state, reward):
         """
@@ -96,38 +96,41 @@ class NimAI():
         best_future = self.best_future_reward(new_state)
         self.update_q_value(old_state, action, old, reward, best_future)
 
-    #TODO: (nothing)
     def get_q_value(self, state, action):
         """
         Return the Q-value for the state `state` and the action `action`.
         If no Q-value exists yet in `self.q`, return 0.
         """
+        # Se o estado e acção existirem, retorna o valor
+        state = tuple(state)  # Convert state to a tuple
         if state in self.q and action in self.q[state]:
             return self.q[state][action]
-    #TODO: (nonthing)
+        return 0
+    
     def update_q_value(self, state, action, old_q, reward, future_rewards):
         """
         Update the Q-value for the state `state` and the action `action`
         given the previous Q-value `old_q`, a current reward `reward`,
-        and an estiamte of future rewards `future_rewards`.
+        and an estimate of future rewards `future_rewards`.
 
         Use the formula:
 
         Q(s, a) <- old value estimate
-                   + alpha * (new value estimate - old value estimate)
+                + alpha * (new value estimate - old value estimate)
 
         where `old value estimate` is the previous Q-value,
         `alpha` is the learning rate, and `new value estimate`
         is the sum of the current reward and estimated future rewards.
         """
-        alpha = 0.1  # Learning rate -> Verificar o que faz isto
-        new_value_estimate = reward + future_rewards # novo valor é igual à recompensa actual + futuras
-        updated_q = old_q + alpha * (new_value_estimate - old_q) # implementação da formula acima descrita
+        state = tuple(state)  # Convert state to a tuple
+        alpha = 0.1  # Learning rate
+        new_value_estimate = reward + future_rewards
+        updated_q = old_q + alpha * (new_value_estimate - old_q)
         
-        if state not in self.q: # Se o estado não existir, cria-se um novo
+        if state not in self.q:
             self.q[state] = {}
-        self.q[state][action] = updated_q # Actualiza o valor do estado e acção
-    # TODO: (ALL)
+        self.q[state][action] = updated_q
+        
     def best_future_reward(self, state):
         """
         Given a state `state`, consider all possible `(state, action)`
@@ -138,8 +141,17 @@ class NimAI():
         Q-value in `self.q`. If there are no available actions in
         `state`, return 0.
         """
-        raise NotImplementedError
-    #TODO: (ALL)
+        # Se o estado não existir, retorna 0
+        state = tuple(state) 
+        if state not in self.q: 
+            return 0
+        possible_actions = Nim.available_actions(state)
+        # Se não houver acções possíveis, retorna 0
+        if not possible_actions: 
+            return 0
+        # Retorna o valor máximo de todas as acções possíveis
+        return max([self.get_q_value(state, action) for action in possible_actions])
+    
     def choose_action(self, state, epsilon=True):
         """
         Given a state `state`, return an action `(i, j)` to take.
@@ -155,8 +167,22 @@ class NimAI():
         If multiple actions have the same Q-value, any of those
         options is an acceptable return value.
         """
-        raise NotImplementedError
+        state = tuple(state)  # Convert state to a tuple
+        available_actions = list(Nim.available_actions(state))
+        
+        if not available_actions:
+            raise ValueError("No available actions for the given state")
 
+        # Se o epsilon for falso, retorna a melhor acção
+        if not epsilon: 
+            return max(available_actions, key=lambda x: self.get_q_value(state, x))
+        
+        # Se o epsilon for verdadeiro, escolhe uma acção aleatória
+        if random.random() < self.epsilon: 
+            return random.choice(available_actions)
+        
+        # Retorna a melhor acção disponível
+        return max(available_actions, key=lambda x: self.get_q_value(state, x))
 
 def train(n):
     """
