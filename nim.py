@@ -72,7 +72,7 @@ class Nim():
 
 class NimAI():
 
-    def __init__(self, alpha=0.5, epsilon=0.1):
+    def __init__(self, alpha = 0.5, epsilon=0.1):
         """
         Initialize AI with an empty Q-learning dictionary,
         an alpha (learning) rate, and an epsilon rate.
@@ -103,9 +103,13 @@ class NimAI():
         """
         # Se o estado e acção existirem, retorna o valor
         state = tuple(state)  # Convert state to a tuple
-        if state in self.q and action in self.q[state]:
-            return self.q[state][action]
-        return 0
+        # if state in self.q and action in self.q[state]:
+        #     return self.q[state][action]
+        # return 0
+    
+        # retorna o valor para o par no dicionário, se nao retorna zero
+        return self.q.get((state, action), 0)
+
     
     def update_q_value(self, state, action, old_q, reward, future_rewards):
         """
@@ -123,13 +127,17 @@ class NimAI():
         is the sum of the current reward and estimated future rewards.
         """
         state = tuple(state)  # Convert state to a tuple
-        alpha = 0.1  # Learning rate
+        #alpha =  self.alpha  # estava 0.1  
+        # Alpha - Learning rate - quanto mais próximo de 1, mais rápido aprende
+        # quanto mais baixo, mais lento pois o novo valor influencia menos
+        
         new_value_estimate = reward + future_rewards
-        updated_q = old_q + alpha * (new_value_estimate - old_q)
+        updated_q = old_q + self.alpha * (new_value_estimate - old_q)
         
         if state not in self.q:
             self.q[state] = {}
-        self.q[state][action] = updated_q
+        #self.q[state][action] = updated_q
+        self.q[(state, action)] = updated_q
         
     def best_future_reward(self, state):
         """
