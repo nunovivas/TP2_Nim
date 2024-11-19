@@ -3,7 +3,7 @@ import random
 import time
 
 
-class Nim():
+class Nim:
 
     def __init__(self, initial=[1, 3, 5, 7]):
         """
@@ -70,9 +70,9 @@ class Nim():
             self.winner = self.player
 
 
-class NimAI():
+class NimAI:
 
-    def __init__(self, alpha = 0.5, epsilon=0.1):
+    def __init__(self, alpha=0.5, epsilon=0.1):
         """
         Initialize AI with an empty Q-learning dictionary,
         an alpha (learning) rate, and an epsilon rate.
@@ -106,11 +106,10 @@ class NimAI():
         # if state in self.q and action in self.q[state]:
         #     return self.q[state][action]
         # return 0
-    
+
         # retorna o valor para o par no dicionário, se nao retorna zero
         return self.q.get((state, action), 0)
 
-    
     def update_q_value(self, state, action, old_q, reward, future_rewards):
         """
         Update the Q-value for the state `state` and the action `action`
@@ -127,18 +126,18 @@ class NimAI():
         is the sum of the current reward and estimated future rewards.
         """
         state = tuple(state)  # Convert state to a tuple
-        #alpha =  self.alpha  # estava 0.1  
+        # alpha =  self.alpha  # estava 0.1
         # Alpha - Learning rate - quanto mais próximo de 1, mais rápido aprende
         # quanto mais baixo, mais lento pois o novo valor influencia menos
-        
+
         new_value_estimate = reward + future_rewards
         updated_q = old_q + self.alpha * (new_value_estimate - old_q)
-        
+
         if state not in self.q:
             self.q[state] = {}
-        #self.q[state][action] = updated_q
+        # self.q[state][action] = updated_q
         self.q[(state, action)] = updated_q
-        
+
     def best_future_reward(self, state):
         """
         Given a state `state`, consider all possible `(state, action)`
@@ -150,16 +149,13 @@ class NimAI():
         `state`, return 0.
         """
         # Se o estado não existir, retorna 0
-        state = tuple(state) 
-        if state not in self.q: 
-            return 0
-        possible_actions = Nim.available_actions(state)
-        # Se não houver acções possíveis, retorna 0
-        if not possible_actions: 
-            return 0
-        # Retorna o valor máximo de todas as acções possíveis
-        return max([self.get_q_value(state, action) for action in possible_actions])
-    
+        q_value = 0
+        for action in Nim.available_actions(state):
+            # dá o valor máximo entre o valor actual e o valor do par
+            q_value = max(q_value, self.get_q_value(tuple(state), action))
+
+        return q_value
+
     def choose_action(self, state, epsilon=True):
         """
         Given a state `state`, return an action `(i, j)` to take.
@@ -177,20 +173,21 @@ class NimAI():
         """
         state = tuple(state)  # Convert state to a tuple
         available_actions = list(Nim.available_actions(state))
-        
+
         if not available_actions:
             raise ValueError("No available actions for the given state")
 
         # Se o epsilon for falso, retorna a melhor acção
-        if not epsilon: 
+        if not epsilon:
             return max(available_actions, key=lambda x: self.get_q_value(state, x))
-        
+
         # Se o epsilon for verdadeiro, escolhe uma acção aleatória
-        if random.random() < self.epsilon: 
+        if random.random() < self.epsilon:
             return random.choice(available_actions)
-        
+
         # Retorna a melhor acção disponível
         return max(available_actions, key=lambda x: self.get_q_value(state, x))
+
 
 def train(n):
     """
@@ -205,10 +202,7 @@ def train(n):
         game = Nim()
 
         # Keep track of last move made by either player
-        last = {
-            0: {"state": None, "action": None},
-            1: {"state": None, "action": None}
-        }
+        last = {0: {"state": None, "action": None}, 1: {"state": None, "action": None}}
 
         # Game loop
         while True:
@@ -232,7 +226,7 @@ def train(n):
                     last[game.player]["state"],
                     last[game.player]["action"],
                     new_state,
-                    1
+                    1,
                 )
                 break
 
@@ -242,7 +236,7 @@ def train(n):
                     last[game.player]["state"],
                     last[game.player]["action"],
                     new_state,
-                    0
+                    0,
                 )
 
     print("Done training")

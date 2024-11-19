@@ -17,4 +17,6 @@ q_value = ai.get_q_value(state, action)
 # Check if the Q-value is within the expected range
 expected_q_value = 0.5 + 0.1 * ((1 + 0.5) - 0.5)
 print(f"Q-value: {q_value}, Expected Q-value: {expected_q_value}")
-assert 0.599 <= q_value <= 0.601, f"Expected Q-value to be in range [0.599, 0.601], got {q_value}"
+assert (
+    0.599 <= q_value <= 0.601
+), f"Expected Q-value to be in range [0.599, 0.601], got {q_value}"

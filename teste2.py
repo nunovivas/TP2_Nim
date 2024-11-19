@@ -20,4 +20,6 @@ q_value = ai.get_q_value(state, action)
 # Check if the Q-value is within the expected range
 expected_q_value = old_q + 0.1 * ((reward + future_rewards) - old_q)
 print(q_value)
-assert abs(q_value - expected_q_value) < 1e-6, f"Expected Q-value to be {expected_q_value}, got {q_value}"
+assert (
+    abs(q_value - expected_q_value) < 1e-6
+), f"Expected Q-value to be {expected_q_value}, got {q_value}"
