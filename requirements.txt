@@ -36,3 +36,16 @@ k-means - é um algoritmo de clustering que divide os dados em k grupos, de mane
 
 
 Para o NIM vai-se usar o Q-Learning
+
+São portanto dadas recompensas e punições para que o agente possa decidir que acção tomar no futuro.
+
+O agente está em determinado estado consoante o ambiente.
+Quanto toma uma acção em relação ao ambiente, tem recompensa ou punição.
+Acaba por ser uma cadeia de Markov. com várias cadeias de decisão. genero arvore binária.
+
+Modelo de transição. (dado o estado S e action A, passamos para S') De aqui sai uma recompensa, baseado em S, A e S'
+
+isto é, calcula todas e retorna o MAXimo de recompensa possivel para aquela mudança de estado
+
+Explore vs Exploit
+

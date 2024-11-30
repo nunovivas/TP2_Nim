@@ -83,7 +83,9 @@ class NimAI:
          - `action` is a tuple `(i, j)` for an action
         """
         self.q = {}  # Initialize Q-values dictionary
-        self.alpha = alpha  # Learning rate
+        self.alpha = alpha  # Learning rate -> passou para aqui a definição
+        # Nota: podia mudar e tentar ajustar a pelalidade, mas como se está a treinar com 10000 passagens e o jogo tem 4 piles só, acaba por ver 
+        # todas as acções possiveis e nao vale muito a pena.
         self.epsilon = epsilon  # Exploration rate
 
     def update(self, old_state, action, new_state, reward):
@@ -126,7 +128,7 @@ class NimAI:
         is the sum of the current reward and estimated future rewards.
         """
         state = tuple(state)  # Convert state to a tuple
-        # alpha =  self.alpha  # estava 0.1
+        # alpha =  self.alpha  # estava 0.1 nao tem que estar aqui
         # Alpha - Learning rate - quanto mais próximo de 1, mais rápido aprende
         # quanto mais baixo, mais lento pois o novo valor influencia menos
 
@@ -251,7 +253,9 @@ def play(ai, human_player=None):
     `human_player` can be set to 0 or 1 to specify whether
     human player moves first or second.
     """
-
+    # Aqui o segundo jogador ganha sempre quando estiverem apenas 3 piles
+    # isto é calculável através de uma formula de XORs mais info aqui: https://www.geeksforgeeks.org/find-winner-nim-game/
+    
     # If no player order set, choose human's order randomly
     if human_player is None:
         human_player = random.randint(0, 1)

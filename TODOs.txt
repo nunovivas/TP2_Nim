@@ -1,4 +1,3 @@
--> Verificar o que faz exatamente o algoritmo e por aqui uma descrição para não me esquecer
 -> Implementar as duas funções que faltam
 -> Testar
 -> Bug correction
